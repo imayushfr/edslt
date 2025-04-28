@@ -1,46 +1,46 @@
-# EDSA Assignment Q10: Smart Bridge Load Monitor Simulation
+EDSA Assignment Q8: Earthquake Rescue Robot Coordinator
 
-## Name: 
-## Roll Number: ME24B10
-## Date: 15/04/2025
-### PROBLEM STATEMENT:
-Designing a Smart Bridge Load Monitor to track bridge components (e.g., "Beam", "Cable", "Deck", "Pylon", "Joint") for safety.
-### KEY OBJECTIVES:
-•	Simulating load tests and monitor stress levels of bridge components.
-•	Maintaining a log of recent load test results and handling overflow.
-•	Updating status of stressed components after reinforcement.
-•	Managing and tracking components which needs high-priority repairs in a cyclic order.
-•	Using appropriate data structures in structural monitoring systems.
-### DESIGN EXPLANATION:
-#### Why These Data Structures ?
-•	Queue: Components which added first, will be tested first.
-•	Stack: Most recent stressed components are considered most urgent, needs immediate action.
-•	Fixed-Size Array: Maintaining history of latest 6 load results, automatically overwriting old  entries.
-•	Singly Linked List: Allows dynamic addition/removal of stressed components.
-•	Doubly Linked List: Allows forward/backward traversal.
-•	Circular Linked List: Allows cyclic traversal.
-#### How they are efficient ?
+Name: Ayush Gupta
+Roll Number: ME24B1076
+Date: 15/04/2025
+PROBLEM STATEMENT:
+Designing an Earthquake Rescue Robot Coordinator to deploy robots (e.g., "Scanner" , "Digger" , "Lift" , "Light" , "Drone") for disaster relief.
+KEY OBJECTIVES:
+•	Implement efficient mission queuing and urgency management.
+•	Maintain a fixed-size mission log with overwrite feature.
+•	Track damaged vs repaired robots using appropriate data structures.
+•	Redeploy high-priority robots in a cyclic pattern.
+DESIGN EXPLANATION:
+Why These Data Structures ?
+•	Circular Queue: Used for mission allocation to maintain FIFO order in limited space.
+•	Stack: Manages urgent missions in LIFO order, ensuring last-in tasks are executed first.
+•	Fixed-Size Array: Rescue log stores limited entries, automatically replacing old logs.
+•	Singly Linked List: Efficiently adds/removes damaged robots.
+•	Doubly Linked List: Allows forward/backward traversal of repaired robots for inspection.
+•	Circular Linked List: Allows cyclic traversal for redeployment.
+How they are efficient ?
 •	Queue/Stack: O(1) for insert/remove.
 •	Linked Lists: Dynamic, no reallocation needed.
-•	Circular Linked List: Natural for repeated rounds without reset logic.
-### LOGIC OF THE CODE:
-#### Task 1: Load and Stress Test
-•	Components are enqueued into a queue.
-•	Urgent components are dequeued and pushed into a stack.
+•	Circular List: Natural for repeated rounds without reset logic.
+LOGIC OF THE CODE:
+Task 1: Mission and Urgency
+•	Robots are enqueued into a circular queue.
+•	Urgent task’s robots are dequeued and pushed into a stack.
 •	Stack is then popped to execute urgent tasks.
-#### Task 2: Load History Unit
-•	New load results are logged in a fixed array of 6 elements.
-•	On overflow, the oldest entry is overwritten by shifting all entries left.
+Task 2: Rescue Log
+•	New missions are logged in a fixed array.
+•	On overflow, the oldest log is overwritten by shifting all entries left.
 
-#### Task 3: Stressed Component Tracker
-•	Components which are stressed added to a singly linked list.
-•	Once reinforced, it is removed from stress list and added to a doubly linked list.
+Task 3: Damaged and Repaired Tracking
+•	Damaged robots added to a singly linked list.
+•	Once repaired, removed from damaged list and added to a doubly linked list.
 •	Traversals are done in both directions.
-#### Task 4: Priority Repairs
-•	Components which needs urgent action are added to a circular linked list.
-•	Traversed multiple times to simulate periodic monitoring.
-### KEY VARIABLES AND FUNCTIONS:
-#### Task 1: Load and Stress Test Variables:
+Task 4: Priority Redeployment
+•	Robots needing urgent action are added to a circular linked list.
+•	Traversed multiple times to simulate periodic redeployment.
+KEY VARIABLES AND FUNCTIONS:
+Task 1: Mission and Urgency
+Variables:
 •	Cqueue: Circular queue to manage incoming missions.
 •	Stack: Stack to prioritize urgent missions.
 Functions:
@@ -50,13 +50,14 @@ Functions:
 •	push(): Push a robot into the urgent stack.
 •	pop(): Pop a robot out of the urgent stack.
 ________________________________________
-#### Task 2: Load History Unit Variables:
+Task 2: Rescue Log
+Variables:
 •	Log: Stores the rescue mission history in a fixed-size array
 Functions
 •	init_log(): Initializes the log counter.
 •	log_mission(): Adds a new mission to the log and if full, then removes the oldest one by shifting the array.
 ________________________________________
-#### Task 3:  Stressed Component Tracker
+Task 3: Damaged Robot Tracker
 Variables:
 •	singly_node: Node of singly linked list for damaged robots.
 •	doubly_node: Node of doubly linked list for repaired robots.
@@ -69,26 +70,28 @@ Functions:
 •	traverse_forward(): Traverses repaired robot list forward.
 •	traverse_backward(): Traverses repaired robot list backward.
 ________________________________________
-#### Task 4: Priority Repairs
+Task 4: Priority Redeployment
 Variables:
 •	circular_node: Node of circular linked list for priority redeployment.
 Functions:
 •	create_circular(): Creates a new circular list node.
 •	insert_priority(): Adds a robot to the circular list.
 •	traverse_circular(): Cycles through the priority redeployment list for a given number of rounds.
-### ANSWERS TO CREATIVITY QUESTIONS
-#### Q1. Why LIFO fits here ?
-LIFO is appropriate for stress checks because the last component tested (the Bolt) might be crucial for holding other components together. If the Bolt fails, other components might be at risk regardless of their condition. Checking the most recent concerns first ensures critical connections are addressed before analyzing individual components. 
-#### Q2. Reason for archiving: 
-Archiving the oldest load test results is essential for maintaining compliance with infrastructure safety regulations that require historical data retention. This enables engineers to track structural degradation patterns over time while focusing on recent readings for immediate safety decisions. 
-#### Q3. Stress cause and fix: 
-The Cable exhibited stress due to excessive vibration from high winds and heavy traffic loads. The reinforcement involved installing advanced dampers to absorb vibration and applying carbon fiber wrapping to strengthen the cable without adding significant weight, thus extending its service life by 15-20 years.
+ANSWERS TO CREATIVITY QUESTIONS
+Q1. Why LIFO fits for urgent tasks deployment ?
+LIFO fits for urgent tasks deployment because the most recent urgent task will need immediate attention to be in action. e.g. The cutter robot added at last must be deployed first to clear debris before other robots can access affected areas. 
+Q2. Reason for reporting: 
+Reporting completed missions will allow authorities to update statistics & manage manpower and resources to active missions rather than completed ones. 
+Q3. Damage and Fix: 
+Suppose digger robot's hydraulic pipe got severely damaged byfalling debris which requires
+complete of its pressure lines and valves. Engineers need to reinforced the frame with carbon fiber to improve durability. 
 
-#### Q4. Repair Tweak: 
-The Pylon repair was enhanced with a smart sensor network that continuously monitors micro-movements and temperature variations. This adaptive system automatically adjusts internal tension cables during extreme weather events, providing real-time data to maintenance crews and allowing for preventive intervention before structural issues develop.  
-## CODE:
-// Name: 
-// Roll Number: ME24B10
+Q4. Redeployment Tweak: 
+The Lift robot got thermal imaging camera which is capable of detecting heat through concrete up to 2.5 meters thick, enabling it to prioritize areas with confirmed signs of alive trapped survivors.
+ 
+CODE:
+// Name: Ayush Gupta
+// Roll Number: ME24B1076
 
 #include <stdio.h>
 #include <string.h>
@@ -561,7 +564,7 @@ int main()
 }
 
 
-## SAMPLE OUTPUT:
+SAMPLE OUTPUT:
  PS C:\Users\AYUSH GUPTA\Desktop\c> gcc edsa.c
 PS C:\Users\AYUSH GUPTA\Desktop\c> ./a
 Scanner enqueued.
