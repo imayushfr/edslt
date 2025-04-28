@@ -1,28 +1,28 @@
-EDSA Assignment Q8: Earthquake Rescue Robot Coordinator
+# EDSA Assignment Q8: Earthquake Rescue Robot Coordinator
 
-Name: Ayush Gupta
-Roll Number: ME24B1076
-Date: 15/04/2025
-PROBLEM STATEMENT:
+## Name: Ayush Gupta
+## Roll Number: ME24B1076
+## Date: 15/04/2025
+### PROBLEM STATEMENT:
 Designing an Earthquake Rescue Robot Coordinator to deploy robots (e.g., "Scanner" , "Digger" , "Lift" , "Light" , "Drone") for disaster relief.
-KEY OBJECTIVES:
+### KEY OBJECTIVES:
 •	Implement efficient mission queuing and urgency management.
 •	Maintain a fixed-size mission log with overwrite feature.
 •	Track damaged vs repaired robots using appropriate data structures.
 •	Redeploy high-priority robots in a cyclic pattern.
-DESIGN EXPLANATION:
-Why These Data Structures ?
+### DESIGN EXPLANATION:
+#### Why These Data Structures ?
 •	Circular Queue: Used for mission allocation to maintain FIFO order in limited space.
 •	Stack: Manages urgent missions in LIFO order, ensuring last-in tasks are executed first.
 •	Fixed-Size Array: Rescue log stores limited entries, automatically replacing old logs.
 •	Singly Linked List: Efficiently adds/removes damaged robots.
 •	Doubly Linked List: Allows forward/backward traversal of repaired robots for inspection.
 •	Circular Linked List: Allows cyclic traversal for redeployment.
-How they are efficient ?
+#### How they are efficient ?
 •	Queue/Stack: O(1) for insert/remove.
 •	Linked Lists: Dynamic, no reallocation needed.
 •	Circular List: Natural for repeated rounds without reset logic.
-LOGIC OF THE CODE:
+### LOGIC OF THE CODE:
 Task 1: Mission and Urgency
 •	Robots are enqueued into a circular queue.
 •	Urgent task’s robots are dequeued and pushed into a stack.
@@ -38,7 +38,7 @@ Task 3: Damaged and Repaired Tracking
 Task 4: Priority Redeployment
 •	Robots needing urgent action are added to a circular linked list.
 •	Traversed multiple times to simulate periodic redeployment.
-KEY VARIABLES AND FUNCTIONS:
+### KEY VARIABLES AND FUNCTIONS:
 Task 1: Mission and Urgency
 Variables:
 •	Cqueue: Circular queue to manage incoming missions.
@@ -77,7 +77,7 @@ Functions:
 •	create_circular(): Creates a new circular list node.
 •	insert_priority(): Adds a robot to the circular list.
 •	traverse_circular(): Cycles through the priority redeployment list for a given number of rounds.
-ANSWERS TO CREATIVITY QUESTIONS
+### ANSWERS TO CREATIVITY QUESTIONS
 Q1. Why LIFO fits for urgent tasks deployment ?
 LIFO fits for urgent tasks deployment because the most recent urgent task will need immediate attention to be in action. e.g. The cutter robot added at last must be deployed first to clear debris before other robots can access affected areas. 
 Q2. Reason for reporting: 
@@ -89,7 +89,7 @@ complete of its pressure lines and valves. Engineers need to reinforced the fram
 Q4. Redeployment Tweak: 
 The Lift robot got thermal imaging camera which is capable of detecting heat through concrete up to 2.5 meters thick, enabling it to prioritize areas with confirmed signs of alive trapped survivors.
  
-CODE:
+## CODE:
 // Name: Ayush Gupta
 // Roll Number: ME24B1076
 
@@ -564,8 +564,8 @@ int main()
 }
 
 
-SAMPLE OUTPUT:
- PS C:\Users\AYUSH GUPTA\Desktop\c> gcc edsa.c
+## SAMPLE OUTPUT:
+PS C:\Users\AYUSH GUPTA\Desktop\c> gcc edsa.c
 PS C:\Users\AYUSH GUPTA\Desktop\c> ./a
 Scanner enqueued.
 Digger enqueued.
